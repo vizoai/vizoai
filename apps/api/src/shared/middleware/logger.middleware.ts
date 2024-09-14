@@ -13,7 +13,9 @@ export class LoggerMiddleware implements NestMiddleware {
     const start = Date.now();
     res.setHeader("Powered-By", "Vizo");
     await next();
-    const duration = Date.now() - start;
-    this.logger.log(`Request processed in ${duration}ms`);
+    res.on('finish', () => {
+      const duration = Date.now() - start;
+      this.logger.log(`Request processed in ${duration}ms`);
+    })
   }
 }

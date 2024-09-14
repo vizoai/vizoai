@@ -29,27 +29,22 @@ export class RequestLogInterceptor implements NestInterceptor {
   async intercept(context: ExecutionContext, next: CallHandler<any>) {
     const request = context.switchToHttp().getRequest<FastifyRequest>();
     const response = context.switchToHttp().getResponse<FastifyReply>();
-
     const userAgent = request.headers["user-agent"];
-
     const { method, url } = request;
-
     const clientIp = getClientIp(request);
-    console.log("clientIp", clientIp);
-    const city = await this.ipToCity(clientIp);
-
-    this.logger.log(
-      `${method} ${url} ${clientIp} ${userAgent}: ${context.getClass().name} ${
-        context.getHandler().name
-      } city: ${city}`,
-    );
 
     const now = Date.now();
 
     return next.handle().pipe(
-      tap((res) => {
+      tap(async (res) => {
+        const duration = Date.now() - now
+        // const city = await this.ipToCity(clientIp);
+        // this.logger.log(
+        //   `${method} ${url} ${clientIp} ${userAgent}: ${context.getClass().name} ${context.getHandler().name
+        //   } city: ${city}`,
+        // );
         this.logger.log(
-          `${method} ${url} ${clientIp} ${userAgent}: ${response.statusCode}: ${Date.now() - now}ms`,
+          `${method} ${url} ${clientIp} ${userAgent}: ${response.statusCode}: ${duration}ms`,
         );
         this.logger.debug(`Response: ${JSON.stringify(res)}`);
       }),
