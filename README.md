@@ -1,1 +1,1 @@
-# vizoai
+# Vizo

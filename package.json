@@ -1,0 +1,38 @@
+{
+  "name": "vizoai-monorepo",
+  "private": true,
+  "engines": {
+    "node": "^18.19.0 || >=20.0.0"
+  },
+  "packageManager": "pnpm@9.10.0",
+  "type": "module",
+  "scripts": {
+    "prebuild": "NODE_ENV=production turbo build --filter=\"./packages/*\"",
+    "build": "NODE_ENV=production turbo build --filter=\"./apps/*\"",
+    "format": "biome format --fix .",
+    "lint": "biome lint --fix .",
+    "db:generate": "turbo db:generate",
+    "db:migrate": "turbo db:migrate",
+    "db:push": "turbo db:push",
+    "dev:docs": "turbo run dev --filter=\"./docs\"",
+    "build:docker": "turbo build:docker",
+    "start:docker": "turbo start:docker",
+    "db:studio": "turbo db:studio",
+    "start": "turbo run start --filter=\"./apps/*\"",
+    "test": "vitest",
+    "dev:pkg": "NODE_ENV=development turbo dev --filter=\"./packages/*\"",
+    "dev": "NODE_ENV=development turbo dev --filter=\"./apps/*\" --parallel"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "@vercel/ncc": "^0.38.1",
+    "dotenv-cli": "^7.4.2",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.2.4",
+    "tsx": "^4.19.1",
+    "turbo": "^2.1.2",
+    "typescript": "^5.6.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^2.1.1"
+  }
+}

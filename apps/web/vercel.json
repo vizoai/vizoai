@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api(/.*)?",
+      "destination": "https://vizo-api.vercel.app/api$1"
+    },
+    {
+      "source": "/docs(/.*)?",
+      "destination": "https://vizo-docs.vercel.app/docs$1"
+    }
+  ]
+}
