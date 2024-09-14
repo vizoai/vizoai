@@ -28,7 +28,8 @@
       "cache": false
     },
     "build:docker": {
-      "dependsOn": ["^build:docker"]
+      "dependsOn": ["^build:docker"],
+      "cache": false
     },
     "start:docker": {
       "cache": false
