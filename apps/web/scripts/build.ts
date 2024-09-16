@@ -83,7 +83,6 @@ const build = async () => {
   fse.copySync(path.join(cwd, "build"), output);
   const config = dotenv.config({ path: "../../.env" });
 
-  fse.writeJSONSync(path.join(output, "env.json"), config.parsed);
   fse.writeJSONSync(path.join(output, "pm2.json"), {
     apps: [
       {
@@ -93,7 +92,7 @@ const build = async () => {
         max_restarts: 3,
         restart_delay: 10000,
         exec_mode: "cluster",
-        extra_env: ["./env.json"],
+        env: config.parsed,
         exp_backoff_restart_delay: 100,
       },
     ],

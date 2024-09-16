@@ -42,8 +42,9 @@ async function build() {
   fs.copySync(path.join(cwd, "build"), output);
 
   const config = dotenv.config({ path: "../../.env" });
-
-  fs.writeJSONSync(path.join(output, "env.json"), config.parsed);
+  fs.writeJSONSync(path.join(output, "package.json"), {
+    type: "commonjs",
+  });
   fs.writeJSONSync(path.join(output, "pm2.json"), {
     apps: [
       {
@@ -53,7 +54,7 @@ async function build() {
         max_restarts: 3,
         restart_delay: 10000,
         exec_mode: "cluster",
-        extra_env: ["./env.json"],
+        env: config.parsed,
         exp_backoff_restart_delay: 100,
       },
     ],
