@@ -37,7 +37,7 @@ export class RequestLogInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap(async (res) => {
-        const duration = Date.now() - now
+        const duration = Date.now() - now;
         // const city = await this.ipToCity(clientIp);
         // this.logger.log(
         //   `${method} ${url} ${clientIp} ${userAgent}: ${context.getClass().name} ${context.getHandler().name

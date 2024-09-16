@@ -2,6 +2,7 @@
 import ncc from "@vercel/ncc";
 import path from "path";
 import * as fs from "fs-extra";
+import dotenv from "dotenv";
 
 const bundleName = "index.js";
 
@@ -14,7 +15,7 @@ async function build() {
     minify: false,
     sourceMap: true,
     out: targetPath,
-    cache: false,
+    cache: true,
     externals: [],
     // target: 'es5',
     assetsBuilds: false,
@@ -34,6 +35,29 @@ async function build() {
   fs.ensureDirSync(path.dirname(outfile));
   fs.writeFileSync(path.join(targetPath, bundleName), code, "utf-8");
   console.log("build success");
+
+  // output
+  const output = path.join("../../build/api");
+  fs.removeSync(output);
+  fs.copySync(path.join(cwd, "build"), output);
+
+  const config = dotenv.config({ path: "../../.env" });
+
+  fs.writeJSONSync(path.join(output, "env.json"), config.parsed);
+  fs.writeJSONSync(path.join(output, "pm2.json"), {
+    apps: [
+      {
+        name: "vizoai-api",
+        script: "./index.js",
+        instances: "max",
+        max_restarts: 3,
+        restart_delay: 10000,
+        exec_mode: "cluster",
+        extra_env: ["./env.json"],
+        exp_backoff_restart_delay: 100,
+      },
+    ],
+  });
 }
 
 build().catch((e) => {

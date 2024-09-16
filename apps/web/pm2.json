@@ -1,13 +1,13 @@
 {
-    "apps": [
-      {
-        "name": "vizoai-web",
-        "script": "./build/server.js",
-        "instances": "max",
-        "max_restarts": 3,
-        "restart_delay": 10000,
-        "exec_mode": "cluster",
-        "exp_backoff_restart_delay": 100
-      }
-    ]
-  }
+  "apps": [
+    {
+      "name": "vizoai-web",
+      "script": "./build/server.js",
+      "instances": "max",
+      "max_restarts": 3,
+      "restart_delay": 10000,
+      "exec_mode": "cluster",
+      "exp_backoff_restart_delay": 100
+    }
+  ]
+}

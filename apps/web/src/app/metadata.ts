@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const generateMetadata = async (): Promise<Metadata> => {
   // const config = await getConfig();
-  const config = {} as Record<string, string>
+  const config = {} as Record<string, string>;
   const title = config.title || "Vizo";
   const description = config.description || "Vizo AI";
   return {
