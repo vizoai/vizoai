@@ -4,7 +4,6 @@ import { NestFactory } from "@nestjs/core";
 import { RootModule } from "./root.module";
 import { generateSwagger } from "./swagger";
 import { VERSION_NEUTRAL, VersioningType } from "@nestjs/common";
-import { RequestLogInterceptor } from "./core/logger";
 
 const prefix = "/api";
 
@@ -28,8 +27,6 @@ export class Vizo {
       fastifyAdapter,
     );
     nestApp.setGlobalPrefix(prefix);
-    const interceptors = [nestApp.get(RequestLogInterceptor)];
-    nestApp.useGlobalInterceptors(...interceptors);
 
     nestApp.enableVersioning({
       type: VersioningType.HEADER,

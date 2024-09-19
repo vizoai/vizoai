@@ -4,6 +4,8 @@ import Logo from "./components/logo";
 import StartButton from "./components/start-button";
 import { useRouter } from "next/router";
 
+const domain = "https://www.vizoai.com";
+
 const config: DocsThemeConfig = {
   logo: <Logo />,
   darkMode: true,
@@ -26,10 +28,8 @@ const config: DocsThemeConfig = {
   head: function useHead() {
     const config = useConfig();
     const { route } = useRouter();
-    const isDefault = route === "/" || !config.title;
-    const image =
-      "https://www.vizoai.com/" +
-      (isDefault ? "og.jpeg" : `api/og?title=${config.title}`);
+    // const isDefault = route === "/" || !config.title;
+    // const image = `${domain}/` + (isDefault ? "og.jpeg" : `api/og?title=${config.title}`);
 
     const description = config.frontMatter.description || "Make Nice AI.";
     const title = config.title + (route === "/" ? "" : " - VizoAI");
@@ -40,7 +40,7 @@ const config: DocsThemeConfig = {
         <meta property="og:title" content={title} />
         <meta name="description" content={description} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={image} />
+        {/* <meta property="og:image" content={image} /> */}
 
         <meta name="msapplication-TileColor" content="#fff" />
         <meta httpEquiv="Content-Language" content="en" />

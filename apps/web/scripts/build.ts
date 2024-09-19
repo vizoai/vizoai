@@ -1,6 +1,6 @@
-import * as fs from "fs";
+import * as fs from "node:fs";
 import fse from "fs-extra";
-import path from "path";
+import path from "node:path";
 import pkg from "../package.json";
 import childProcess from "node:child_process";
 import dotenv from "dotenv";

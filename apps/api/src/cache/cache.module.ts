@@ -20,6 +20,10 @@ import { CACHE_QUEUE_NAME } from "../queue/constant";
       useFactory: (configService: ConfigService) => {
         const opts: RedisOptions = {
           lazyConnect: true,
+          reconnectOnError: (err) => {
+            console.log("reconnectOnError", err);
+            return true;
+          },
         };
         const redis = new Ioredis(configService.redisUrl, opts);
         return new CacheService(redis, { prefix: "cache_" });

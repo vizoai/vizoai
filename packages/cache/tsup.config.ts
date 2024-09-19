@@ -8,5 +8,5 @@ export default defineConfig({
     js: format === "cjs" ? ".cjs" : ".mjs",
   }),
   splitting: true,
-  noExternal: ["nanoid"],
+  noExternal: ["superjson"],
 });

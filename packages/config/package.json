@@ -13,8 +13,8 @@
   },
   "repository": "https://github.com/vizoai/vizoai",
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub"
+    "build": "tsup",
+    "dev": "tsup --stub"
   },
   "sideEffects": false,
   "private": false,
@@ -27,8 +27,7 @@
     "superjson": "^2.2.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.7",
-    "unbuild": "^2.0.0"
+    "@types/lodash": "^4.17.7"
   },
   "peerDependices": {
     "ioredis": "^5.4.1"

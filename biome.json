@@ -4,7 +4,7 @@
     "enabled": true
   },
   "linter": {
-    "ignore": ["node_modules", "dist", ".next", "public"],
+    "ignore": ["node_modules", "dist", ".next", "public", "build"],
     "enabled": true,
     "rules": {
       "recommended": true,

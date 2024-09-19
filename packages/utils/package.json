@@ -1,34 +1,27 @@
 {
   "name": "@vizoai/utils",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
     }
   },
   "repository": "https://github.com/vizoai/vizoai",
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch"
+    "build": "tsup"
   },
   "sideEffects": false,
   "private": false,
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@vizoai/cache": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/lodash": "^4.17.7",
-    "ioredis": "^5.4.1"
-  },
-  "peerDependices": {
-    "ioredis": "^5.4.1"
+    "nanoid": "^5.0.7"
   }
 }

@@ -1,6 +1,6 @@
 // @ts-ignore
 import ncc from "@vercel/ncc";
-import path from "path";
+import path from "node:path";
 import * as fs from "fs-extra";
 import dotenv from "dotenv";
 
@@ -11,7 +11,7 @@ async function build() {
   const targetPath = path.join(cwd, "build");
   fs.removeSync(targetPath);
   fs.ensureDirSync(targetPath);
-  let { code, assets } = await ncc(path.join(cwd, "src/main.ts"), {
+  const { code, assets } = await ncc(path.join(cwd, "src/main.ts"), {
     minify: false,
     sourceMap: true,
     out: targetPath,

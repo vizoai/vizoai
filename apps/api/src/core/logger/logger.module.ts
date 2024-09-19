@@ -1,23 +1,128 @@
-import { type DynamicModule, Module } from "@nestjs/common";
+import {
+  Global,
+  Module,
+  DynamicModule,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+  Inject,
+} from "@nestjs/common";
+import { Provider } from "@nestjs/common/interfaces";
+import { FastifyRequest, FastifyReply } from "fastify";
+import { Options, pinoHttp } from "pino-http";
 
-import { RequestLogInterceptor } from "./interceptor/request-log.interceptor";
-import { HttpModule } from "@nestjs/axios";
+import { createProvidersForDecorated } from "./inject-pino-logger";
+import { Logger } from "./logger";
+import {
+  Params,
+  LoggerModuleAsyncParams,
+  PARAMS_PROVIDER_TOKEN,
+} from "./params";
+import { PinoLogger } from "./pino-logger";
+import { Store, storage } from "./storage";
 
-@Module({})
-export class LoggerModule {
-  static forRoot(): DynamicModule {
-    const providers = [RequestLogInterceptor];
+const DEFAULT_ROUTES = [{ path: "*", method: RequestMethod.ALL }];
+
+@Global()
+@Module({ providers: [Logger], exports: [Logger] })
+export class LoggerModule implements NestModule {
+  static forRoot(params?: Params | undefined): DynamicModule {
+    const paramsProvider: Provider<Params> = {
+      provide: PARAMS_PROVIDER_TOKEN,
+      useValue: params || {},
+    };
+
+    const decorated = createProvidersForDecorated();
 
     return {
-      global: true,
-      exports: providers,
-      imports: [
-        HttpModule.register({
-          timeout: 5000,
-        }),
-      ],
-      providers: providers,
       module: LoggerModule,
+      global: params?.global,
+      providers: [Logger, ...decorated, PinoLogger, paramsProvider],
+      exports: [Logger, ...decorated, PinoLogger, paramsProvider],
     };
   }
+
+  static forRootAsync(params: LoggerModuleAsyncParams): DynamicModule {
+    const paramsProvider: Provider<Params | Promise<Params>> = {
+      provide: PARAMS_PROVIDER_TOKEN,
+      useFactory: params.useFactory,
+      inject: params.inject,
+    };
+
+    const decorated = createProvidersForDecorated();
+
+    const providers: any[] = [
+      Logger,
+      ...decorated,
+      PinoLogger,
+      paramsProvider,
+      ...(params.providers || []),
+    ];
+
+    return {
+      module: LoggerModule,
+      imports: params.imports,
+      providers,
+      global: params.global,
+      exports: [Logger, ...decorated, PinoLogger, paramsProvider],
+    };
+  }
+
+  constructor(@Inject(PARAMS_PROVIDER_TOKEN) private readonly params: Params) {}
+
+  configure(consumer: MiddlewareConsumer) {
+    const {
+      exclude,
+      forRoutes = DEFAULT_ROUTES,
+      pinoHttp,
+      useExisting,
+    } = this.params;
+
+    const middlewares = createLoggerMiddlewares(pinoHttp || {}, useExisting);
+
+    if (exclude) {
+      consumer
+        .apply(...middlewares)
+        .exclude(...exclude)
+        .forRoutes(...forRoutes);
+    } else {
+      consumer.apply(...middlewares).forRoutes(...forRoutes);
+    }
+  }
+}
+
+function createLoggerMiddlewares(
+  params: NonNullable<Params["pinoHttp"]>,
+  useExisting = false,
+) {
+  if (useExisting) {
+    return [bindLoggerMiddlewareFactory(useExisting)];
+  }
+
+  const middleware = pinoHttp(params as Options);
+
+  // @ts-expect-error: root is readonly field, but this is the place where
+  // it's set actually
+  PinoLogger.root = middleware.logger;
+
+  // FIXME: params type here is pinoHttp.Options | pino.DestinationStream
+  // pinoHttp has two overloads, each of them takes those types
+  return [middleware, bindLoggerMiddlewareFactory(useExisting)];
+}
+
+function bindLoggerMiddlewareFactory(useExisting: boolean) {
+  return function bindLoggerMiddleware(
+    req: FastifyRequest["raw"],
+    _res: FastifyReply["raw"],
+    next: () => void | Promise<void>,
+  ) {
+    let log = req.log;
+
+    if (!useExisting && req.allLogs) {
+      log = req.allLogs[req.allLogs.length - 1]!;
+    }
+
+    // be called without arguments
+    storage.run(new Store(log), next);
+  };
 }

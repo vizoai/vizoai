@@ -14,8 +14,8 @@
   "files": ["dist"],
   "repository": "https://github.com/vizoai/vizoai",
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub"
+    "build": "tsup",
+    "dev": "tsup --watch"
   },
   "sideEffects": false,
   "private": false,
