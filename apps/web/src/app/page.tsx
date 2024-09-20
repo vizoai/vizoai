@@ -1,4 +1,6 @@
-import { Button } from "antd";
+'use client';
+
+import { Button, Space } from "@arco-design/web-react";
 import SwitchTheme from "../components/theme/switch-theme";
 import Link from "next/link";
 import { Views } from "../components/analytics/view";
@@ -11,12 +13,14 @@ export default function HomePage() {
           Vizo
         </h1>
       </div>
-      <Link href="/login">
-        <Button type="primary">Login</Button>
-      </Link>
-      <Link href="/console">
-        <Button type="primary">控制台</Button>
-      </Link>
+      <Space>
+        <Link href="/login">
+          <Button type="primary">Login</Button>
+        </Link>
+        <Link href="/console">
+          <Button type="primary">控制台</Button>
+        </Link>
+      </Space>
       <SwitchTheme />
       <Views />
     </main>

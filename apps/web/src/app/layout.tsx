@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import type { ResolvingViewport } from "next";
 import type { PropsWithChildren } from "react";
+import "@arco-design/web-react/dist/css/arco.css";
 
 import Analytics from "../components/analytics";
 import { ThemeProvider } from "../components/theme";
