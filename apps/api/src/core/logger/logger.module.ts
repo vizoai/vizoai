@@ -23,7 +23,6 @@ import { Store, storage } from "./storage";
 
 const DEFAULT_ROUTES = [{ path: "*", method: RequestMethod.ALL }];
 
-@Global()
 @Module({ providers: [Logger], exports: [Logger] })
 export class LoggerModule implements NestModule {
   static forRoot(params?: Params | undefined): DynamicModule {
