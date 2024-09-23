@@ -17,11 +17,8 @@ export class LoggerErrorInterceptor implements NestInterceptor {
         throwError(() => {
           const res = context.switchToHttp().getResponse();
 
-          if (res["raw"]) {
-            res.raw.err = error;
-          } else {
-            res.err = error;
-          }
+          if (res.raw) res.raw.err = error;
+          else res.err = error;
 
           return error;
         }),

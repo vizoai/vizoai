@@ -1,0 +1,15 @@
+# Package Managers
+
+node_modules
+
+# Editor Configs
+
+.idea
+.DS_Store
+
+/.cache
+.env
+
+# Tests
+
+/coverage
