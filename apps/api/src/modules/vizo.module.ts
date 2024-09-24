@@ -10,7 +10,7 @@ import { CacheModule } from "../cache";
 import { ConfigModule } from "../config";
 import { DatabaseModule } from "../database";
 import { AccountModule } from "./account";
-import { ApplicationModule } from "./app";
+import { AppsModule } from "./apps";
 import { FileModule } from "./file";
 import { HealthModule } from "./health";
 import { ModelModule } from "./model";
@@ -35,7 +35,7 @@ import { QueueModule } from "../queue/queue.module";
     AccountModule,
     ToolModule,
     FileModule,
-    ApplicationModule,
+    AppsModule,
     HealthModule,
   ],
 })

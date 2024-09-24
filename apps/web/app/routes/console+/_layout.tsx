@@ -1,7 +1,7 @@
 import { Outlet } from "@remix-run/react";
 import type { MetaFunction } from "@vercel/remix";
 
-export const ROUTE_PATH = '/console' as const
+export const ROUTE_PATH = "/console" as const;
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,7 +11,5 @@ export const meta: MetaFunction = () => {
 };
 
 export default function AuthLayout() {
-  return (
-    <Outlet />
-  );
+  return <Outlet />;
 }

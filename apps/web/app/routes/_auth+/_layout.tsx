@@ -9,7 +9,5 @@ export const meta: MetaFunction = () => {
 };
 
 export default function AuthLayout() {
-  return (
-    <Outlet />
-  );
+  return <Outlet />;
 }

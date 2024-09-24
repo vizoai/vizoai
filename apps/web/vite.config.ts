@@ -3,7 +3,7 @@ import { installGlobals } from "@remix-run/node";
 import { defineConfig } from "vite";
 import { vercelPreset } from "@vercel/remix/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { flatRoutes } from 'remix-flat-routes'
+import { flatRoutes } from "remix-flat-routes";
 
 installGlobals();
 
@@ -14,9 +14,12 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  plugins: [remix({
-    presets: [vercelPreset()],
-    ignoredRouteFiles: ['**/.*'],
-    routes: async (defineRoutes) => flatRoutes('routes', defineRoutes),
-  }), tsconfigPaths()],
+  plugins: [
+    remix({
+      presets: [vercelPreset()],
+      ignoredRouteFiles: ["**/.*"],
+      routes: async (defineRoutes) => flatRoutes("routes", defineRoutes),
+    }),
+    tsconfigPaths(),
+  ],
 });

@@ -27,7 +27,7 @@
     "superjson": "^2.2.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.7"
+    "@types/lodash": "^4.17.9"
   },
   "peerDependices": {
     "ioredis": "^5.4.1"

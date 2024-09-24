@@ -1,1 +1,1 @@
-export * from "@vizoai/cache";
+export * from '@vizoai/cache';

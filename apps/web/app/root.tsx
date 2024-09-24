@@ -12,13 +12,13 @@ import { isDev } from "./utils/env";
 import { antdStyle } from "./components/antd/const";
 import globalCss from "./styles/global.css?url";
 import {
-  LinksFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
+  type LinksFunction,
+  type LoaderFunctionArgs,
+  type MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/react";
 import { combineHeaders } from "./utils/misc.server";
-import { siteConfig } from "./consts/site";
+import { siteConfig } from "./const/site";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   return json(
@@ -72,11 +72,7 @@ function Document({ children }: { children: React.ReactNode }) {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <Document>
-      {children}
-    </Document>
-  );
+  return <Document>{children}</Document>;
 }
 
 export default function App() {

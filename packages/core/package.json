@@ -25,7 +25,7 @@
     "@vizoai/cache": "workspace:*"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.7",
+    "@types/lodash": "^4.17.9",
     "ioredis": "^5.4.1"
   },
   "peerDependices": {

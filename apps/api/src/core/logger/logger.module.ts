@@ -98,7 +98,10 @@ function createLoggerMiddlewares(
     return [bindLoggerMiddlewareFactory(useExisting)];
   }
 
-  const middleware = pinoHttp(params as Options);
+  console.log("params", params);
+  const middleware = pinoHttp({
+    ...(params as Options),
+  });
 
   // @ts-expect-error: root is readonly field, but this is the place where
   // it's set actually

@@ -3,7 +3,7 @@ import {
   ModuleMetadata,
 } from "@nestjs/common/interfaces";
 import { Logger, DestinationStream } from "pino";
-import { Options } from "pino-http";
+import { type Options } from "pino-http";
 
 export type PassedLogger = { logger: Logger };
 

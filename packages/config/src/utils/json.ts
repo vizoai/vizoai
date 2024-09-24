@@ -1,7 +1,7 @@
 // @ts-expect-error
-import SuperJSON from "superjson";
-import _isNaN from "lodash/isNaN";
-import _toNumber from "lodash/toNumber";
+import SuperJSON from 'superjson';
+import _isNaN from 'lodash/isNaN';
+import _toNumber from 'lodash/toNumber';
 
 const isNumber = (value: unknown) => !_isNaN(_toNumber(value));
 

@@ -9,10 +9,13 @@ import { VizoModule } from "./modules/vizo.module";
 import { LoggerModule } from "./core/logger";
 
 @Module({
-  imports: [VizoModule, LoggerModule.forRoot({ global: true })],
+  imports: [
+    LoggerModule.forRoot({ global: true }),
+    VizoModule,
+  ],
 })
 export class RootModule implements OnModuleInit, NestModule {
-  onModuleInit() {}
+  onModuleInit() { }
   configure(consumer: MiddlewareConsumer) {
     // consumer.apply(LoggerMiddleware).forRoutes("*");
   }

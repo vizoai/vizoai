@@ -1,12 +1,12 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["cjs", "esm"],
+  entry: ['src/index.ts'],
+  format: ['cjs', 'esm'],
   dts: true,
   outExtension: ({ format }) => ({
-    js: format === "cjs" ? ".cjs" : ".mjs",
+    js: format === 'cjs' ? '.cjs' : '.mjs',
   }),
   splitting: true,
-  noExternal: ["superjson"],
+  noExternal: ['superjson'],
 });

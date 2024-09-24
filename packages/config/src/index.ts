@@ -1,19 +1,19 @@
-import type { Redis } from "ioredis";
-import transform from "lodash/transform";
-import { unserialize, serialize } from "./utils/json";
-import { isNil } from "lodash";
+import type { Redis } from 'ioredis';
+import transform from 'lodash/transform';
+import { unserialize, serialize } from './utils/json';
+import { isNil } from 'lodash';
 
 // Define the type for the cache closure function
 export type CacheClosure<T> = () => Promise<T> | T;
 
 // Define the constant for successful Redis operation response
-const REDIS_SUCCESS = "OK";
+const REDIS_SUCCESS = 'OK';
 
 /**
  * Class representing a cache store using Redis.
  */
 export class CacheStore {
-  protected prefix = ""; // Prefix for cache keys
+  protected prefix = ''; // Prefix for cache keys
   protected readonly redis: Redis; // Redis client instance
 
   /**
@@ -22,7 +22,7 @@ export class CacheStore {
    * @returns The current cache key prefix.
    */
   getPrefix(): string {
-    return this.prefix || "";
+    return this.prefix || '';
   }
 
   /**
@@ -182,7 +182,7 @@ export class CacheStore {
     keys: string[],
     defaultVal: T | null = null,
   ): Promise<Record<string, T | null>> {
-    const values = await this.redis.mget(keys.map((key) => this.getKey(key)));
+    const values = await this.redis.mget(keys.map(key => this.getKey(key)));
     return values.reduce(
       (results, value, idx) => {
         results[keys[idx]] = this.unserialize<T>(value) ?? defaultVal;
