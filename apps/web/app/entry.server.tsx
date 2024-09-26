@@ -21,16 +21,14 @@ export default async function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
-  loadContext: AppLoadContext & { locale: string },
 ) {
   const isBot = isBotRequest(request.headers.get("user-agent"));
 
-  console.log('loadContext', loadContext)
-  let callbackName = isBot ? "onAllReady" : "onShellReady";
+  const callbackName = isBot ? "onAllReady" : "onShellReady";
 
-  let instance = createInstance();
-  let lng = await i18next.getLocale(request);
-  let ns = i18next.getRouteNamespaces(remixContext);
+  const instance = createInstance();
+  const lng = await i18next.getLocale(request);
+  const ns = i18next.getRouteNamespaces(remixContext);
   console.log('locale', lng)
 
   await instance
@@ -57,8 +55,7 @@ export default async function handleRequest(
             abortDelay={ABORT_DELAY}
           />
         </StyleProvider>
-      </I18nextProvider>
-      ,
+      </I18nextProvider>,
       {
         [callbackName]: () => {
           shellRendered = true;

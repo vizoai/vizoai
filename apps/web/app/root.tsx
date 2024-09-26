@@ -8,7 +8,6 @@ import {
 } from "@remix-run/react";
 import { isBrowser } from "browser-or-node";
 import React from "react";
-import { useChangeLanguage } from "remix-i18next/react";
 import { Analytics } from "@vercel/analytics/react";
 import { isDev } from "./utils/env";
 import { antdStyle } from "./components/antd/const";
@@ -59,10 +58,10 @@ export const links: LinksFunction = () => {
 };
 
 function Document({ children, lang }: { children: React.ReactNode, lang: string }) {
-  let { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
-    <html lang={lang} dir={i18n.dir()}>
+    <html lang={i18n.language} dir={i18n.dir()}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -81,9 +80,7 @@ function Document({ children, lang }: { children: React.ReactNode, lang: string 
 }
 
 export default function App() {
-  const { locale, } = useLoaderData<typeof loader>()
-  console.log('locale', locale)
-  useChangeLanguage(locale)
+  const { locale } = useLoaderData<typeof loader>()
 
   return <Document lang={locale}><Outlet /></Document>;
 }
