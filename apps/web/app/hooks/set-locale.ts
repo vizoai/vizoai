@@ -10,9 +10,8 @@ export function useLocale() {
     fetch('/action/set-locale', {
       method: 'POST',
       body: JSON.stringify({ locale: lang }),
-    }).then(() => {
-      setLocale(lang)
     })
+    setLocale(lang)
   }, [i18n.language])
 
   return [
