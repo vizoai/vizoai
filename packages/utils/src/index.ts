@@ -1,3 +1,2 @@
-import { nanoid } from './lib/nanoid';
-
-export { nanoid };
+export { nanoid } from './lib/nanoid';
+export { superjson } from './lib/superjson';

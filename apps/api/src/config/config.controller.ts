@@ -1,4 +1,4 @@
-import { Controller, Get, Version } from "@nestjs/common";
+import { Controller, Get } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { assign, camelCase } from "lodash";
 
@@ -17,7 +17,9 @@ export class ConfigController {
     private readonly cache: CacheService,
     private readonly config: ConfigService,
     @InjectQueue(CACHE_QUEUE_NAME) private cacheQueue: Queue,
-  ) {}
+  ) {
+    //
+  }
 
   @Get("version")
   version() {

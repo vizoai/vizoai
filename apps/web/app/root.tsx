@@ -4,9 +4,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import { isBrowser } from "browser-or-node";
 import React from "react";
+import { useChangeLanguage } from "remix-i18next/react";
 import { Analytics } from "@vercel/analytics/react";
 import { isDev } from "./utils/env";
 import { antdStyle } from "./components/antd/const";
@@ -19,15 +21,20 @@ import {
 import { json } from "@remix-run/react";
 import { combineHeaders } from "./utils/misc.server";
 import { siteConfig } from "./const/site";
+import i18next, { localeCookie } from "./i18n/i18next.server";
+import { useTranslation } from "react-i18next";
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
+  let locale = await i18next.getLocale(request);
+
   return json(
-    {},
+    { locale },
     {
       headers: combineHeaders(
         {},
-        // { "Set-Cookie": await localeCookie.serialize(locale) },
-        // csrfCookieHeader ? { "Set-Cookie": csrfCookieHeader } : null,
+        {
+          'Set-Cookie': await localeCookie.serialize(locale),
+        },
       ),
     },
   );
@@ -51,9 +58,11 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: globalCss }];
 };
 
-function Document({ children }: { children: React.ReactNode }) {
+function Document({ children, lang }: { children: React.ReactNode, lang: string }) {
+  let { i18n } = useTranslation();
+
   return (
-    <html lang="en">
+    <html lang={lang} dir={i18n.dir()}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -71,10 +80,10 @@ function Document({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Layout({ children }: { children: React.ReactNode }) {
-  return <Document>{children}</Document>;
-}
-
 export default function App() {
-  return <Outlet />;
+  const { locale, } = useLoaderData<typeof loader>()
+  console.log('locale', locale)
+  useChangeLanguage(locale)
+
+  return <Document lang={locale}><Outlet /></Document>;
 }

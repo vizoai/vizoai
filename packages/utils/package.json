@@ -20,8 +20,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {},
   "devDependencies": {
-    "nanoid": "^5.0.7"
+    "nanoid": "^5.0.7",
+    "superjson": "^2.2.1"
   }
 }

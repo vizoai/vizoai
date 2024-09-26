@@ -1,7 +1,7 @@
 import {
   type DynamicModule,
   Module,
-  OnApplicationShutdown,
+  OnModuleInit,
 } from "@nestjs/common";
 
 import { ConfigService } from "../config/config.service";
@@ -9,7 +9,8 @@ import { DatabaseService } from "./database.service";
 import { DatabaseModuleOptions } from "./constant";
 
 @Module({})
-export class DatabaseModule implements OnApplicationShutdown {
+export class DatabaseModule implements OnModuleInit {
+  constructor(private readonly db: DatabaseService) {}
   static forRoot(options: DatabaseModuleOptions = {}): DynamicModule {
     const { logger = false, timeout = 3000 } = options;
     return {
@@ -18,12 +19,10 @@ export class DatabaseModule implements OnApplicationShutdown {
         {
           provide: DatabaseService,
           inject: [ConfigService],
-          useFactory: (configService: ConfigService) => {
-            return new DatabaseService(configService, {
-              logger,
-              timeout,
-            });
-          },
+          useFactory: (configService: ConfigService) => DatabaseService.create(configService, {
+            logger,
+            timeout,
+          }),
         },
       ],
       global: true,
@@ -31,5 +30,7 @@ export class DatabaseModule implements OnApplicationShutdown {
     };
   }
 
-  async onApplicationShutdown(): Promise<void> {}
+  async onModuleInit() {
+    // console.log("DatabaseModule initialized", this.db.pg.options.connection);
+  }
 }

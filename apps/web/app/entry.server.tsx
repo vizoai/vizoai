@@ -7,17 +7,41 @@ import * as isbotModule from "isbot";
 import { createCache, extractStyle, StyleProvider } from "@ant-design/cssinjs";
 import { renderToPipeableStream } from "react-dom/server";
 import { antdStyle } from "./components/antd/const";
+import i18n from "./i18n";
+import { createInstance } from "i18next";
+import i18next from './i18n/i18next.server'
+import { I18nextProvider, initReactI18next } from "react-i18next";
+import { resolve } from "node:path";
+import Backend from 'i18next-fs-backend';
 
 const ABORT_DELAY = 5_000;
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
-  loadContext: AppLoadContext,
+  loadContext: AppLoadContext & { locale: string },
 ) {
   const isBot = isBotRequest(request.headers.get("user-agent"));
+
+  console.log('loadContext', loadContext)
+  let callbackName = isBot ? "onAllReady" : "onShellReady";
+
+  let instance = createInstance();
+  let lng = await i18next.getLocale(request);
+  let ns = i18next.getRouteNamespaces(remixContext);
+  console.log('locale', lng)
+
+  await instance
+    .use(initReactI18next) // Tell our instance to use react-i18next
+    .use(Backend)
+    .init({
+      ...i18n, // spread the configuration
+      lng, // The locale we detected above
+      ns, // The namespaces the routes about to render wants to use
+      backend: { loadPath: resolve("./public/locales/{{lng}}/{{ns}}.json") },
+    });
 
   return new Promise((resolve, reject) => {
     let shellRendered = false;
@@ -25,15 +49,18 @@ export default function handleRequest(
     let isStyleExtracted = false;
 
     const { pipe, abort } = renderToPipeableStream(
-      <StyleProvider cache={cache}>
-        <RemixServer
-          context={remixContext}
-          url={request.url}
-          abortDelay={ABORT_DELAY}
-        />
-      </StyleProvider>,
+      <I18nextProvider i18n={instance}>
+        <StyleProvider cache={cache}>
+          <RemixServer
+            context={remixContext}
+            url={request.url}
+            abortDelay={ABORT_DELAY}
+          />
+        </StyleProvider>
+      </I18nextProvider>
+      ,
       {
-        onAllReady() {
+        [callbackName]: () => {
           shellRendered = true;
           const body = new PassThrough({
             transform(c, _, callback) {

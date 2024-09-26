@@ -9,14 +9,14 @@ import {
 } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 
-import { AppsService } from "./apps.service";
+import { AppService } from "./app.service";
 import { CreateAppDto } from "./dto/create-app.dto";
 import { UpdateAppDto } from "./dto/update-app.dto";
 
 @Controller("app")
 @ApiTags("App")
-export class AppsController {
-  constructor(private readonly appService: AppsService) {}
+export class AppController {
+  constructor(private readonly appService: AppService) {}
 
   @Post()
   create(@Body() createAppDto: CreateAppDto) {

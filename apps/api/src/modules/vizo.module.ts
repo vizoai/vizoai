@@ -10,7 +10,7 @@ import { CacheModule } from "../cache";
 import { ConfigModule } from "../config";
 import { DatabaseModule } from "../database";
 import { AccountModule } from "./account";
-import { AppsModule } from "./apps";
+import { AppModule } from "./app";
 import { FileModule } from "./file";
 import { HealthModule } from "./health";
 import { ModelModule } from "./model";
@@ -18,7 +18,8 @@ import { ProviderModule } from "./provider";
 import { TaskModule } from "./task";
 import { ToolModule } from "./tool";
 import { UserModule } from "./user";
-import { QueueModule } from "../queue/queue.module";
+import { QueueModule } from "../queue";
+import { PluginModule } from "./plugins";
 
 @Module({
   imports: [
@@ -35,8 +36,9 @@ import { QueueModule } from "../queue/queue.module";
     AccountModule,
     ToolModule,
     FileModule,
-    AppsModule,
+    AppModule,
     HealthModule,
+    PluginModule,
   ],
 })
 export class VizoModule implements NestModule {

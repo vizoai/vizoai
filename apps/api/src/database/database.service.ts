@@ -28,9 +28,6 @@ const createDrizzle = (url: string, opts: DatabaseModuleOptions) => {
   const transparentParser = (val: any) => val;
   const client = postgres(url, {
     idle_timeout: 3000,
-    onnotice(notice) {
-      console.log("Notice:", notice);
-    },
   });
 
   // Override postgres.js default date parsers: https://github.com/porsager/postgres/discussions/761
@@ -79,7 +76,7 @@ export class DatabaseService extends PgDatabase<
   TSchema
 > {
   public readonly schema: TSchema = schemas;
-  protected readonly pg: postgres.Sql;
+  public readonly pg: postgres.Sql;
 
   constructor(configService: ConfigService, opts: DatabaseModuleOptions) {
     const { dialect, session, schema, client } = createDrizzle(
@@ -88,6 +85,10 @@ export class DatabaseService extends PgDatabase<
     );
     super(dialect, session, schema);
     this.pg = client;
+  }
+
+  static create(configService: ConfigService, opts: DatabaseModuleOptions) {
+    return new DatabaseService(configService, opts);
   }
 
   notify(channel: string, payload: string) {
