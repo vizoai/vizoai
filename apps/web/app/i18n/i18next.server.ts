@@ -39,9 +39,9 @@ let i18next = new RemixI18Next({
     backend: {
       loadPath: resolve("./public/locales/{{lng}}/{{ns}}.json"),
     },
-    // interpolation: {
-    //   escapeValue: false,
-    // },
+    interpolation: {
+      escapeValue: false,
+    },
   },
   // The i18next plugins you want RemixI18next to use for `i18n.getFixedT` inside loaders and actions.
   // E.g. The Backend plugin for loading translations from the file system

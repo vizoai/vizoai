@@ -12,7 +12,7 @@
     "db:migrate": "turbo db:migrate",
     "db:push": "turbo db:push",
     "dev:docs": "turbo run dev --filter=\"./docs\"",
-    "postinstall": "NODE_ENV=production turbo build --filter=\"./packages/*\" && vizoai-scripts postinstall",
+    "postinstall": "vizoai-scripts turbo build",
     "build:docker": "turbo build:docker",
     "start:docker": "turbo start:docker",
     "db:studio": "turbo db:studio",

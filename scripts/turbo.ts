@@ -1,3 +1,6 @@
+import { spawnSync } from './internal/utils';
+import { PATHS } from './internal/constants';
+
 (async () => {
   const args = process.argv.slice(2);
 
@@ -17,7 +20,7 @@
     args.unshift('--cache-dir', `".turbo"`);
   }
 
-  // const command = `turbo run ${args.join(' ')}`;
+  const command = `turbo run ${args.join(' ')}`;
 
-  // spawnSync(command, { cwd: PATHS.ROOT });
+  spawnSync(command, { cwd: PATHS.ROOT });
 })();
