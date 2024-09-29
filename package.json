@@ -1,9 +1,6 @@
 {
   "name": "vizoai-monorepo",
   "private": true,
-  "engines": {
-    "node": "^18.19.0 || >=20.0.0"
-  },
   "packageManager": "pnpm@9.10.0",
   "type": "module",
   "scripts": {
@@ -15,6 +12,7 @@
     "db:migrate": "turbo db:migrate",
     "db:push": "turbo db:push",
     "dev:docs": "turbo run dev --filter=\"./docs\"",
+    "postinstall": "NODE_ENV=production turbo build --filter=\"./packages/*\" && vizoai-scripts postinstall",
     "build:docker": "turbo build:docker",
     "start:docker": "turbo start:docker",
     "db:studio": "turbo db:studio",
@@ -33,6 +31,11 @@
     "tsx": "^4.19.1",
     "turbo": "^2.1.2",
     "typescript": "^5.6.2",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.1",
+    "vizoai-scripts": "workspace:*"
+  },
+  "engines": {
+    "node": "^18.19.0 || >=20.0.0",
+    "pnpm": "^9.0.0"
   }
 }

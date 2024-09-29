@@ -1,14 +1,11 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "ui": "tui",
+  "ui": "stream",
   "globalDependencies": ["**/.env"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        "next-env.d.ts",
         "dist/**",
         ".output/**",
         ".vercel/output/**"

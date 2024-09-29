@@ -1,5 +1,5 @@
 {
-  "name": "@vizoai/cache2",
+  "name": "@vizoai/cache",
   "version": "0.0.3",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
