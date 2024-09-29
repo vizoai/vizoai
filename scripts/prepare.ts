@@ -20,7 +20,9 @@ import { PATHS } from './internal/constants';
     args.unshift('--cache-dir', `".turbo"`);
   }
 
-  const command = `turbo run ${args.join(' ')}`;
+  args.unshift('--output-logs', 'errors-only')
+
+  const command = `turbo run ${args.join(' ')} build`;
 
   spawnSync(command, { cwd: PATHS.ROOT });
 })();

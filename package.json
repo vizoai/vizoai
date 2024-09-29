@@ -11,7 +11,7 @@
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
     "db:push": "turbo db:push",
-    "prepare": "vizoai-scripts turbo build",
+    "prepare": "vizoai-scripts prepare",
     "build:docker": "turbo build:docker",
     "start:docker": "turbo start:docker",
     "db:studio": "turbo db:studio",

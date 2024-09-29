@@ -45,7 +45,6 @@ class Builder {
     } satisfies Record<VercelRuntime, object>;
 
     const bundleName = 'index.js';
-    console.log(process.env);
     const { output = 'dist', vercel = false, entry = 'src/main.ts', root } = this.opts;
     const outputPath = vercel ? path.join(root, '.vercel/output') : output;
     const dirs = {
@@ -57,7 +56,6 @@ class Builder {
     fs.ensureDirSync(outputPath);
     const targetPath = vercel ? path.join(dirs.functions, '_serverless.func') : output;
     fs.ensureDirSync(targetPath);
-    console.log('entry', entry)
     fs.ensureDirSync(path.join(outputPath, "static"))
     fs.copySync(this.opts.staticDir, path.join(outputPath, "static"), { overwrite: true });
     // @ts-ignore
