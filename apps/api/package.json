@@ -15,6 +15,7 @@
     "start:docker": "cross-env NODE_ENV=production pnpm with-env node build/index.js",
     "build:docker": "tsx scripts/build.ts",
     "db:generate": "pnpm with-env drizzle-kit generate",
+    "build:vercel": "pnpm with-env vizoai build --vercel",
     "start": "cross-env NODE_ENV=production pnpm with-env nest start"
   },
   "dependencies": {
@@ -42,9 +43,8 @@
     "@nestjs/terminus": "^10.2.3",
     "@nestjs/throttler": "^6.2.1",
     "@nestjs/websockets": "^10.4.4",
-    "@trpc/server": "^11.0.0-rc.532",
+    "@trpc/server": "^11.0.0-rc.544",
     "@vizoai/cache": "^0.0.3",
-    "@vizoai/utils": "workspace:*",
     "axios": "^1.7.7",
     "bullmq": "^5.13.2",
     "cheerio": "^1.0.0",
@@ -76,8 +76,9 @@
     "@swc/core": "^1.7.28",
     "@types/fs-extra": "^11.0.4",
     "@types/lodash": "^4.17.9",
-    "@types/node": "^20.16.7",
+    "@types/node": "^20.16.10",
     "@types/request-ip": "^0.0.41",
+    "@vizoai/cli": "0.0.0-alpha.26",
     "cross-env": "^7.0.3",
     "drizzle-kit": "^0.24.2",
     "typescript": "^5.6.2"

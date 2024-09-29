@@ -20,5 +20,5 @@
     "noFallthroughCasesInSwitch": false,
     "baseUrl": "."
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "api/**/*.ts"]
 }

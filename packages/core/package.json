@@ -22,7 +22,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@vizoai/cache": "workspace:*"
+    "@vizoai/cache": "^0.0.3"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.9",

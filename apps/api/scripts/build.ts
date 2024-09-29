@@ -37,7 +37,7 @@ async function build() {
   console.log('build success');
 
   // output
-  const output = path.join('../../build/api');
+  const output = path.join('../build');
   fs.removeSync(output);
   fs.copySync(path.join(cwd, 'build'), output);
 
@@ -59,6 +59,8 @@ async function build() {
       },
     ],
   });
+
+  fs.copySync(output, path.join(cwd, '../../build/api'));
 }
 
 build().catch(e => {
