@@ -18,8 +18,7 @@ export function LanguageSwitch() {
           key: lang.value,
           label: lang.text,
           onClick: () => {
-            const nextLanguage = locale === 'en' ? 'zh' : 'en'
-            setLocale(nextLanguage)
+            setLocale(lang.value)
           }
         }))
       }}

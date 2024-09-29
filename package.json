@@ -11,8 +11,7 @@
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
     "db:push": "turbo db:push",
-    "dev:docs": "turbo run dev --filter=\"./docs\"",
-    "postinstall": "vizoai-scripts turbo build",
+    "prepare": "vizoai-scripts turbo build",
     "build:docker": "turbo build:docker",
     "start:docker": "turbo start:docker",
     "db:studio": "turbo db:studio",
@@ -23,6 +22,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.2",
+    "@esbuild-plugins/node-resolve": "^0.2.2",
     "@vercel/ncc": "^0.38.2",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",

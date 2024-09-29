@@ -4,9 +4,9 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
   dts: true,
-  outExtension: ({ format }) => ({
-    js: format === 'cjs' ? '.cjs' : '.mjs',
-  }),
+  sourcemap: true,
+  outExtension: ({ format }) => ({ js: format === "cjs" ? ".cjs" : ".mjs" }),
   splitting: true,
+  minify: true,
   noExternal: ['superjson'],
 });

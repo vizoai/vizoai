@@ -1,7 +1,17 @@
 {
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@vercel/remix", "node", "vite/client", "@remix-run/node"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
+    "types": [
+      "@vercel/remix",
+      "vite-plugin-i18n-ally/virtual",
+      "vite/client",
+      "@remix-run/node",
+      "vite-plugin-remix-flat-routes/virtual"
+    ],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
@@ -15,10 +25,18 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
-      "@/*": ["./*"]
+      "~/*": [
+        "./app/*"
+      ],
+      "@/*": [
+        "./*"
+      ]
     },
     "noEmit": true
   },
-  "exclude": ["node_modules", "dist", "build"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

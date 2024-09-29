@@ -8,8 +8,10 @@ export default defineConfig([
     format: ['cjs', 'esm'],
     dts: true,
     clean: true,
-    outExtension: ({ format }) => ({ js: format === 'cjs' ? '.cjs' : '.mjs' }),
+    outExtension: ({ format }) => ({
+      js: format === 'cjs' ? '.cjs' : '.mjs',
+    }),
     splitting: true,
-    noExternal: ['nanoid', 'superjson']
+    noExternal: ['nanoid', 'superjson'],
   },
 ]);

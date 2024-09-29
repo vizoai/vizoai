@@ -5,7 +5,7 @@ import { createLocaleCookieResolver, localeCookie } from '../../i18n/i18next.ser
 export const action: ActionFunction = async ({ request }) => {
   const localeResolver = createLocaleCookieResolver(localeCookie)
   const cookie = await localeResolver(request)
-  const { locale } = await request.json()
+  const { locale } = await request.json() as { locale: string }
   return json(
     {},
     {

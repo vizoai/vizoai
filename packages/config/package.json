@@ -11,10 +11,15 @@
       "require": "./dist/index.cjs"
     }
   },
-  "repository": "https://github.com/vizoai/vizoai",
+  "repository": {
+    "url": "https://github.com/vizoai/vizoai",
+    "type": "git",
+    "directory": "packages/config"
+  },
+  "license": "Apache-2.0",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --stub"
+    "dev": "tsup --watch"
   },
   "sideEffects": false,
   "private": false,

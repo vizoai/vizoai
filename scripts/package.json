@@ -7,11 +7,10 @@
     "vizoai-scripts": "bin/vizoai-scripts.js"
   },
   "dependencies": {
-    "assert": "^2.1.0",
     "cac": "^6.7.14",
     "chalk": "^5.3.0",
-    "zx": "^7.2.0",
-    "cross-spawn": "^7.0.3"
+    "cross-spawn": "^7.0.3",
+    "zx": "^8.1.8"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.6"

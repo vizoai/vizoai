@@ -14,13 +14,17 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vizoai/vizoai",
+  "repository": {
+    "url": "https://github.com/vizoai/vizoai",
+    "type": "git",
+    "directory": "packages/cache"
+  },
+  "license": "Apache-2.0",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
   },
   "sideEffects": false,
-  "private": false,
   "publishConfig": {
     "access": "public"
   },

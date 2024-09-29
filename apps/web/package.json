@@ -9,12 +9,19 @@
     "start": "pnpm with-env remix-serve ./build/server/index.js",
     "with-env": "dotenv -e ../../.env --"
   },
+  "repository": {
+    "url": "https://github.com/vizoai/vizoai",
+    "type": "git",
+    "directory": "apps/web"
+  },
+  "license": "Apache-2.0",
   "dependencies": {
     "@ant-design/cssinjs": "^1.21.1",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@remix-run/node": "^2.12.1",
     "@remix-run/react": "^2.12.1",
+    "@remix-run/router": "^1.19.2",
     "@remix-run/server-runtime": "^2.12.1",
     "@vercel/analytics": "^1.3.1",
     "@vercel/remix": "^2.12.0",
@@ -56,6 +63,8 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
+    "vite-plugin-i18n-ally": "^5.1.0",
+    "vite-plugin-remix-flat-routes": "^3.5.6",
     "vite-tsconfig-paths": "^5.0.1"
   }
 }

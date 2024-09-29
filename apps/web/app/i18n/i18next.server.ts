@@ -1,10 +1,9 @@
-import { resolve } from "node:path";
 import { RemixI18Next } from "remix-i18next/server";
-import i18n from "../i18n";
-import Backend from "i18next-fs-backend";
+import i18n, { i18nOptions } from "../i18n";
 import createCookie from "~/lib/cookie";
 import { Cookie } from "@remix-run/server-runtime";
 import { cookieName, cookieOptions } from "./i18next.cookie";
+import { resources } from 'virtual:i18n-ally-resource'
 
 export const localeCookie = createCookie(cookieName, cookieOptions)
 
@@ -26,27 +25,26 @@ export function createLocaleCookieResolver(localeCookie: Cookie) {
   return resolver
 }
 
-let i18next = new RemixI18Next({
+const supportedLngs = Object.keys(resources)
+
+export const i18nServerOptions = {
+  ...i18nOptions,
+  supportedLngs,
+  resources,
+}
+
+export const i18nServer = new RemixI18Next({
   detection: {
-    supportedLanguages: i18n.supportedLngs,
-    fallbackLanguage: i18n.fallbackLng,
+    supportedLanguages: i18nServerOptions.supportedLngs,
+    fallbackLanguage: i18nServerOptions.fallbackLng,
     cookie: localeCookie,
   },
-  // This is the configuration for i18next used
-  // when translating messages server-side only
   i18next: {
-    ...i18n,
-    backend: {
-      loadPath: resolve("./public/locales/{{lng}}/{{ns}}.json"),
-    },
+    ...i18nServerOptions,
     interpolation: {
       escapeValue: false,
     },
   },
-  // The i18next plugins you want RemixI18next to use for `i18n.getFixedT` inside loaders and actions.
-  // E.g. The Backend plugin for loading translations from the file system
-  // Tip: You could pass `resources` to the `i18next` configuration and avoid a backend here
-  plugins: [Backend],
 });
 
-export default i18next;
+export default i18nServer;

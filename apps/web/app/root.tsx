@@ -22,6 +22,7 @@ import { combineHeaders } from "./utils/misc.server";
 import { siteConfig } from "./const/site";
 import i18next, { localeCookie } from "./i18n/i18next.server";
 import { useTranslation } from "react-i18next";
+import { useChangeLanguage } from "remix-i18next/react";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   let locale = await i18next.getLocale(request);
@@ -81,6 +82,8 @@ function Document({ children, lang }: { children: React.ReactNode, lang: string 
 
 export default function App() {
   const { locale } = useLoaderData<typeof loader>()
+  
+  useChangeLanguage(locale)
 
   return <Document lang={locale}><Outlet /></Document>;
 }

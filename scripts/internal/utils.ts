@@ -1,12 +1,12 @@
 import spawn from 'cross-spawn';
-import type { SpawnSyncOptions } from 'child_process';
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import type { SpawnSyncOptions } from 'node:child_process';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { PATHS } from './constants';
 
 export function getPkgs(opts?: { base?: string }): string[] {
   const base = opts?.base || PATHS.PACKAGES;
-  return readdirSync(base).filter((dir) => {
+  return readdirSync(base).filter(dir => {
     return !dir.startsWith('.') && existsSync(join(base, dir, 'package.json'));
   });
 }
@@ -22,7 +22,7 @@ export function eachPkg(
   opts?: { base?: string },
 ) {
   const base = opts?.base || PATHS.PACKAGES;
-  pkgs.forEach((pkg) => {
+  pkgs.forEach(pkg => {
     fn({
       name: pkg,
       dir: join(base, pkg),

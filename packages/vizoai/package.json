@@ -1,20 +1,20 @@
 {
-  "name": "@vizoai/core",
-  "version": "0.0.2",
+  "name": "vizoai",
+  "version": "0.0.1",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
     }
   },
   "repository": {
     "url": "https://github.com/vizoai/vizoai",
     "type": "git",
-    "directory": "packages/core"
+    "directory": "packages/vizoai"
   },
   "license": "Apache-2.0",
   "scripts": {
@@ -26,15 +26,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@vizoai/cache": "workspace:*"
-  },
   "devDependencies": {
-    "@types/lodash": "^4.17.9",
-    "ioredis": "^5.4.1",
+    "nanoid": "^5.0.7",
     "superjson": "^2.2.1"
-  },
-  "peerDependices": {
-    "ioredis": "^5.4.1"
   }
 }

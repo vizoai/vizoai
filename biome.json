@@ -11,12 +11,9 @@
   },
   "files": {
     "include": [
-      "packages/**/*.ts",
-      "packages/**/*.tsx",
-      "packages/**/*.js",
-      "packages/**/*.jsx",
-      "scripts/**/*.js",
-      "scripts/**/*.ts"
+      "packages/**/*.{ts,tsx,js,jsx,json}",
+      "apps/**/*.{ts,tsx,js,jsx,json}",
+      "scripts/**/*.{js,ts}"
     ],
     "ignore": ["*.d.ts", "public/**/*", "build/**/*"],
     "ignoreUnknown": true

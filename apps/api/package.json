@@ -2,7 +2,13 @@
   "name": "@vizoai/api",
   "version": "0.0.1",
   "type": "commonjs",
-  "repository": "https://github.com/vizoai/vizoai",
+  "private": true,
+  "repository": {
+    "url": "https://github.com/vizoai/vizoai",
+    "type": "git",
+    "directory": "apps/api"
+  },
+  "license": "Apache-2.0",
   "scripts": {
     "build": "rimraf dist && cross-env NODE_ENV=production nest build",
     "dev": "cross-env NODE_ENV=development pnpm with-env nest start --watch",
@@ -15,7 +21,7 @@
     "start:docker": "cross-env NODE_ENV=production pnpm with-env node build/index.js",
     "build:docker": "tsx scripts/build.ts",
     "db:generate": "pnpm with-env drizzle-kit generate",
-    "build:vercel": "pnpm with-env vizoai build --vercel",
+    "build:vercel": "pnpm with-env vizoai build",
     "start": "cross-env NODE_ENV=production pnpm with-env nest start"
   },
   "dependencies": {
@@ -42,8 +48,6 @@
     "@nestjs/swagger": "^7.4.2",
     "@nestjs/terminus": "^10.2.3",
     "@nestjs/throttler": "^6.2.1",
-    "@nestjs/websockets": "^10.4.4",
-    "@trpc/server": "^11.0.0-rc.552",
     "@vizoai/cache": "workspace:*",
     "axios": "^1.7.7",
     "bullmq": "^5.13.2",
@@ -54,7 +58,7 @@
     "drizzle-zod": "^0.5.1",
     "fastify": "^4.28.1",
     "fs-extra": "^11.2.0",
-    "helmet": "^7.1.0",
+    "helmet": "^7.2.0",
     "ioredis": "^5.4.1",
     "langchain": "^0.3.2",
     "lodash": "^4.17.21",
@@ -78,7 +82,7 @@
     "@types/lodash": "^4.17.9",
     "@types/node": "^20.16.10",
     "@types/request-ip": "^0.0.41",
-    "@vizoai/cli": "0.0.0-alpha.26",
+    "@vizoai/cli": "workspace:*",
     "cross-env": "^7.0.3",
     "drizzle-kit": "^0.24.2",
     "typescript": "^5.6.2"
